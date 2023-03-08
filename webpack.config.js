@@ -7,12 +7,11 @@ const MiniCssWebpackPlugin = require('mini-css-extract-plugin')
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './index.js',
-  mode: 'development',
+  mode: 'production',
   devServer: {
     port: 3000,
     hot: true
   },
-  devtool: 'source-map',
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, 'dist')
