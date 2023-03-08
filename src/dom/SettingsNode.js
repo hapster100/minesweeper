@@ -12,6 +12,9 @@ export class SettingsNode {
     this.node.appendChild(this.heightNode.getNode())
     this.node.appendChild(this.widthNode.getNode())
     this.node.appendChild(this.minesNode.getNode())
+
+    this.maxHeight = config.maxHeight || 40
+    this.maxWidth = config.maxWidth || 40
   }
 
   setFields(config) {
@@ -27,9 +30,11 @@ export class SettingsNode {
       mines: this.minesNode.getValue()
     }
 
-    if(config.mines >= config.height * config.width) config.mines = config.height * config.width - 1
     if(config.height <= 0) config.height = 1
     if(config.width <= 0) config.width = 1
+    if(config.height > this.maxHeight) config.height = this.maxHeight
+    if(config.width > this.maxWidth) config.width = this.maxWidth
+    if(config.mines >= config.height * config.width) config.mines = config.height * config.width - 1
     
     this.setFields(config)
     

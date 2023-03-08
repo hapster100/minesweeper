@@ -6,9 +6,11 @@ import './style.css'
 
 class Game {
   static defaultConfig = () => ({
-    height: 10,
-    width: 10,
-    mines: 10
+    height: 20,
+    width: 20,
+    mines: 20,
+    maxHeight: Math.floor((document.body.clientHeight - 170) / 25),
+    maxWidth: Math.floor((document.body.clientWidth - 20) / 25)
   })
 
   constructor(root) {
@@ -20,18 +22,28 @@ class Game {
     this.preventer = e => { e.preventDefault() }
     document.body.addEventListener('contextmenu', this.preventer)
 
-    this.root.appendChild(this.settings.getNode())
-    this.root.appendChild(this.startButton.getNode())
-
     this.start()
+
   }
 
   start() {
     if(this.minesweeper) {
       this.minesweeper.destroy()
     }
-    this.minesweeper = new MinesweeperNode(this.settings.getConfig())
+    this.minesweeper = new MinesweeperNode(
+      this.settings.getConfig(),
+      this.root.clientWidth,
+      this.root.clientHeight - 200,
+    )
+    this.root.innerHTML = ''
+
+    const ctrlNode = document.createElement('div')
+    ctrlNode.classList.add('ctrl')
+    ctrlNode.appendChild(this.settings.getNode())
+    ctrlNode.appendChild(this.startButton.getNode())
+
     this.root.appendChild(this.minesweeper.getNode())
+    this.root.appendChild(ctrlNode)
     this.minesweeper.render()
   }
 
@@ -41,4 +53,8 @@ class Game {
 }
 
 const root = document.getElementById('root')
-const game = new Game(root)
+let game = new Game(root)
+document.body.onresize = function() {
+  game.destroy()
+  game = new Game(root)
+}

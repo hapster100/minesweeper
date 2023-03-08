@@ -1,7 +1,7 @@
 import {FILED_CELL_STATES} from '../game/FieldCell'
 
 export class CellNode {
-  constructor(cell, count, onOpen, onMark) {
+  constructor(cell, count, size, onOpen, onMark) {
     this.cell = cell
     this.count = count
     this.clickHandler = e => { 
@@ -16,7 +16,8 @@ export class CellNode {
 
     this.node = document.createElement('div')
     this.node.classList.add('field__cell')
-
+    this.node.style.height = size + 'px'
+    this.node.style.width = size + 'px'
     this.node.addEventListener('mousedown', this.clickHandler)
   }
 
@@ -38,8 +39,14 @@ export class CellNode {
   setClasses() {
     if(this.cell.isClosed() || this.cell.isMarked()) {
       this.node.classList.add('field__cell--closed')
+      if (this.count) {
+        this.node.classList.remove('field__cell--' + this.count)
+      }
     } else {
       this.node.classList.remove('field__cell--closed')
+      if (this.count) {
+        this.node.classList.add('field__cell--' + this.count)
+      }
     }
   }
 

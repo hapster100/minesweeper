@@ -4,16 +4,25 @@
 
 body, html {
   margin: 0;
-  background-color: #fcc;
+  background-color: white;
   font-family: monospace;
 }
 
-.minesweeper {
-  position: absolute;
-  top: 0;
-  right: 0;
+.container {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.minesweeper__wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minesweeper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +44,7 @@ body, html {
 .field__row {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .field__row:last-child .field__cell {
@@ -42,9 +52,11 @@ body, html {
 }
 
 .field__cell {
-  width: 30px;
-  height: 30px;
-  background-color: #fff;
+  max-width: 30px;
+  max-height: 30px;
+  flex: 1;
+  aspect-ratio: 1;
+  background-color: #fafafa;
   box-sizing: border-box;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
@@ -64,14 +76,23 @@ body, html {
   background-color: #333;
 }
 
-.settings {
-  position: absolute;
-  z-index: 10;
-  top: 20px;
-  left: 20px;
-  padding: 15px 20px;
-  background-color: rgba(0,0,0, 0.7);
-  border-radius: 20px;
+.field__cell.field__cell--1 {
+  color: rgb(22, 12, 224)
+}
+.field__cell.field__cell--2 {
+  color: rgb(2, 102, 12)
+}
+.field__cell.field__cell--3 {
+  color: rgb(222, 12, 24)
+}
+.field__cell.field__cell--4 {
+  color: rgb(222, 12, 224)
+}
+.field__cell.field__cell--5 {
+  color: rgb(122, 12, 24)
+}
+.field__cell.field__cell--6 {
+  color: rgb(122, 12, 24)
 }
 
 .number-field {
@@ -89,10 +110,11 @@ body, html {
 
 .number-field__input {
   text-align: center;
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 1px 5px;
   line-height: 30px;
-  width: 50px;
+  width: 100px;
+  overflow: hidden;
   color: black;
   border: 1px solid black;
   background-color: white;
@@ -103,17 +125,13 @@ body, html {
 }
 
 .button {
-  z-index: 10;
+  background-color: white;
   cursor: pointer;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
   height: 100px;
   width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0, 0.7);
   border-radius: 20px;
   transition: 0.75s all ease-in;
 }
@@ -122,8 +140,21 @@ body, html {
   user-select: none;
   transform: scale(1, -1);
   pointer-events: none;
-  color: white;
+  color: #333;
   font-size: 75px;
+}
+
+.settings {
+  border-radius: 20px;
+}
+
+.ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 12px 24px;
+  height: 150px;
 }
 
 .button:hover i {

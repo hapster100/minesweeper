@@ -1,12 +1,15 @@
-import {CounterNode} from './CounterNode'
-import {CellNode} from './CellNode'
-import {Minesweeper} from '../game/Minesweeper'
+import { CounterNode } from './CounterNode'
+import { CellNode } from './CellNode'
+import { Minesweeper } from '../game/Minesweeper'
 
 export class MinesweeperNode {
-  constructor(config = {}) {
+  constructor(config = {}, w, h) {
     const {width, height, mines} = config
+    const cellSize = Math.floor(Math.min(w/width, h/height))
+
     this.game = new Minesweeper(width, height, mines)
     this.node = document.createElement('div')
+    this.node.classList.add('minesweeper__wrapper')
     this.cellNodes = []
     this.counterNode = new CounterNode(mines)
 
@@ -29,7 +32,7 @@ export class MinesweeperNode {
         const cell = this.game.field.getCell(i, j)
         const count = this.game.field.getCellCounter(i, j) 
         const cellNode = new CellNode(
-          cell, count,
+          cell, count, cellSize,
           _ => {
             if(cell.isMine && !cell.isMarked()) {
               this.game.gameover()
