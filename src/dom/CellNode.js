@@ -4,21 +4,16 @@ export class CellNode {
   constructor(cell, count, size, onOpen, onMark) {
     this.cell = cell
     this.count = count
-    this.clickHandler = e => { 
-      e.preventDefault()
-      switch (e.buttons) {
-        case 2: onMark()
-        break
-        case 1: onOpen()
-        break
-      }
-    }
+
+    this.onOpen = onOpen
+    this.onMark = onMark
 
     this.node = document.createElement('div')
     this.node.classList.add('field__cell')
     this.node.style.height = size + 'px'
     this.node.style.width = size + 'px'
-    this.node.addEventListener('mousedown', this.clickHandler)
+    this.node.addEventListener('click', this.onOpen)
+    this.node.addEventListener('contextmenu', this.onMark)
   }
 
   setInner() {
@@ -61,6 +56,7 @@ export class CellNode {
 
   destroy() {
     this.node.innerHTML = ''
-    this.node.removeEventListener('click', this.clickHandler)
+    this.node.removeEventListener('click', this.onOpen)
+    this.node.removeEventListener('contextmenu', this.onMark)
   }
 }

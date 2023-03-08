@@ -52,9 +52,17 @@ class Game {
   }
 }
 
+
+function handleVhUnit() {
+  const vh = window.innerHeight/100
+  document.documentElement.style.setProperty('--vh', vh + 'px')
+}
+
+handleVhUnit()
 const root = document.getElementById('root')
 let game = new Game(root)
 document.body.onresize = function() {
+  handleVhUnit()
   game.destroy()
   game = new Game(root)
 }
