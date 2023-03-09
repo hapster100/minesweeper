@@ -8,7 +8,7 @@ class Game {
   static defaultConfig = () => ({
     height: 20,
     width: 20,
-    mines: 20,
+    mines: 40,
     maxHeight: Math.floor((document.body.clientHeight - 170) / 25),
     maxWidth: Math.floor((document.body.clientWidth - 20) / 25)
   })
@@ -32,8 +32,8 @@ class Game {
     }
     this.minesweeper = new MinesweeperNode(
       this.settings.getConfig(),
-      this.root.clientWidth,
-      this.root.clientHeight - 200,
+      this.root.clientWidth - 20,
+      this.root.clientHeight - 170,
     )
     this.root.innerHTML = ''
 
@@ -52,17 +52,5 @@ class Game {
   }
 }
 
-
-function handleVhUnit() {
-  const vh = window.innerHeight/100
-  document.documentElement.style.setProperty('--vh', vh + 'px')
-}
-
-handleVhUnit()
 const root = document.getElementById('root')
 let game = new Game(root)
-document.body.onresize = function() {
-  handleVhUnit()
-  game.destroy()
-  game = new Game(root)
-}

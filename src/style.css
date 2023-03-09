@@ -6,12 +6,12 @@ body, html {
   margin: 0;
   background-color: white;
   font-family: monospace;
+  color: #333;
 }
 
 .container {
-  height: -webkit-fill-available;
-  height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -53,8 +53,8 @@ body, html {
 }
 
 .field__cell {
-  max-width: 30px;
-  max-height: 30px;
+  max-width: 40px;
+  max-height: 40px;
   flex: 1;
   aspect-ratio: 1;
   background-color: #fafafa;
@@ -97,8 +97,6 @@ body, html {
 }
 
 .number-field {
-  color: white;
-  font-size: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,7 +112,7 @@ body, html {
   margin-left: 20px;
   padding: 1px 5px;
   line-height: 30px;
-  width: 100px;
+  width: 80px;
   overflow: hidden;
   color: black;
   border: 1px solid black;
@@ -126,14 +124,14 @@ body, html {
 }
 
 .button {
-  background-color: white;
+  background-color: #333;
   cursor: pointer;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 10px;
   transition: 0.75s all ease-in;
 }
 
@@ -141,9 +139,15 @@ body, html {
   user-select: none;
   transform: scale(1, -1);
   pointer-events: none;
-  color: #333;
-  font-size: 75px;
+  color: white;
+  font-size: 33px;
 }
+
+.button:hover i {
+  transform: scale(1, -1) rotate(-360deg);
+  transition: 0.75s all ease-in;
+}
+
 
 .settings {
   border-radius: 20px;
@@ -153,12 +157,6 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #333;
   padding: 12px 24px;
   height: 150px;
-}
-
-.button:hover i {
-  transform: scale(1, -1) rotate(-360deg);
-  transition: 0.75s all ease-in;
 }
